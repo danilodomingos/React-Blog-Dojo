@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 const Create = () => {
 
@@ -6,6 +7,8 @@ const Create = () => {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('yohshi');
   const [isPending, setIsPending]  = useState(false);
+
+  const history = useHistory();
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,8 +24,9 @@ const Create = () => {
         body: JSON.stringify(blog)
       }).then(() => {
         setIsPending(false);
+        history.push('/');
       });
-      
+
     }, 1000);
   }
 
@@ -42,8 +46,9 @@ const Create = () => {
           <option value="yoshi">yoshi</option>
         </select>
 
-        {!isPending && <button>Add Blog</button>}
-        {isPending && <button>Adding Blog...</button>}
+        { !isPending && <button>Add Blog</button> }
+        { isPending && <button>Adding Blog...</button> }
+
       </form>
     </div>
   );
